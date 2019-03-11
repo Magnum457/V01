@@ -12,6 +12,28 @@ public class ListaUsuario {
 		}
 		
 	// metodos
+		// busca usuario
+		public Usuario buscaUsuario (String login) {
+			for (Usuario u : this.lista) {
+				if(u.getLogin().equals(login)) {
+					return u;
+				}
+			}
+			return null;
+		}
+		
+		// lista usuarios
+		public String listaUsuarios () {
+			String listaUsuarios = "";
+			for (Usuario u : this.lista) {
+				listaUsuarios += "login: " + u.getLogin() + ";";
+				listaUsuarios += "nome: " + u.getNome() + ";";
+				listaUsuarios += "email: " + u.getEmail() + ";";
+				listaUsuarios += "\n";
+			}
+				return listaUsuarios;
+		}
+		
 		// adiciona usuario
 		public void addUsuario (String login, String nome, String email) {
 			// verifica se o usuario já existe
@@ -25,17 +47,28 @@ public class ListaUsuario {
 				
 				this.lista.add(u);
 			}
-			
 		}
 		
-		// busca usuario
-		public Usuario buscaUsuario (String login) {
+		// exclui usuario
+		public void excluiUsuario (String login) {
 			for (Usuario u : this.lista) {
 				if(u.getLogin().equals(login)) {
-					return u;
+					this.lista.remove(u);
 				}
 			}
-			return null;
 		}
 		
+		// editar usuario
+		public void editaUsuario (String login, String nome, String email) {
+			if (this.buscaUsuario(login) != null) {
+				for (Usuario u : this.lista) {
+					if (u.getLogin().equals(login)) {
+						u.setNome(nome);
+						u.setEmail(email);
+					}
+				}
+			} else {
+				System.out.println("Login não existente");
+			}			
+		}
 }
