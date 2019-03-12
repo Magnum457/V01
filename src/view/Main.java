@@ -10,7 +10,7 @@ public class Main {
 		String dados = "";
 		String entrada = "";
 		entrada = "Oi";
-		entrada += "td bem";
+		entrada += "\ntd bem";
 		
 		try {
 			c.escreveDados(c.getFile(), entrada);

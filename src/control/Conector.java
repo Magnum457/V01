@@ -39,7 +39,7 @@ public class Conector {
 			FileReader fr = new FileReader(f);
 			BufferedReader br = new BufferedReader(fr);
 			while(br.ready()) {
-				dados += br.readLine();
+				dados += br.readLine() + "\n";
 			}
 			br.close();
 			fr.close();
