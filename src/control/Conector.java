@@ -11,7 +11,7 @@ public class Conector {
 	private File f;
 	
 	private Conector() {
-		this.f = new File("");
+		this.f = new File("usuario.txt");
 	}
 	
 	public static Conector criaConexao() {
@@ -19,28 +19,31 @@ public class Conector {
 		return c;
 	}
 	
-	public void escreveDados (File f) throws IOException {
-		try {
+	public File getFile() {
+		return this.f;
+	}
+	
+	public void escreveDados (File f, String dados) throws IOException {
+		
 			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
-//			código a ser inserido
+			bw.write(dados);
 			bw.close();
 			fw.close();
-		} catch (Exception e) {
-			
-		}
 		
 	}
 	
-	public void lerDados (File f) throws IOException {
-		try {
+	public String lerDados (File f) throws IOException {
+		String dados = "";
+		
 			FileReader fr = new FileReader(f);
 			BufferedReader br = new BufferedReader(fr);
-//			código a ser inserido
+			while(br.ready()) {
+				dados += br.readLine();
+			}
 			br.close();
 			fr.close();
-		} catch (Exception e) {
 			
-		}
+		return dados;
 	}
 }
