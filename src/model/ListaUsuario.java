@@ -1,10 +1,23 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import control.Conector;
 
 public class ListaUsuario {
 	//	atributos
 		private ArrayList<Usuario> lista;
+		Conector c = Conector.criaConexao();
+		
+	// construtor
+		public ListaUsuario () {
+			String dados = "";
+			try {
+				dados = c.lerDados(c.getFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	// getter
 		public ArrayList<Usuario> getLista (){
@@ -71,4 +84,6 @@ public class ListaUsuario {
 				System.out.println("Login não existente");
 			}			
 		}
+		
+		
 }
