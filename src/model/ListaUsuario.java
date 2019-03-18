@@ -6,7 +6,7 @@ import control.Conector;
 
 public class ListaUsuario {
 	//	atributos
-		private ArrayList<Usuario> lista;
+		private ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		Conector c = Conector.criaConexao();
 		
 	// construtor
@@ -14,6 +14,7 @@ public class ListaUsuario {
 			String dados = "";
 			try {
 				dados = c.lerDados(c.getFile());
+				this.recuperaLista(dados);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -25,6 +26,19 @@ public class ListaUsuario {
 		}
 		
 	// metodos
+		
+		// transforma String em usuario
+		private void recuperaLista (String dados) {
+			String[] objetos = null;
+			for(int i = 0; i < dados.length();i++) {
+				objetos = dados.split("\n");
+			}
+			for(String o : objetos) {
+				String[] objeto = o.split(";");
+				this.addUsuario(objeto[0], objeto[1], objeto[2]);
+			}
+		}
+		
 		// busca usuario
 		public Usuario buscaUsuario (String login) {
 			for (Usuario u : this.lista) {
