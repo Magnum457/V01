@@ -11,10 +11,14 @@ public class ListaUsuario {
 		
 	// construtor
 		public ListaUsuario () {
-			String dados = "";
+			String dados;
 			try {
 				dados = c.lerDados(c.getFile());
-				this.recuperaLista(dados);
+				if (dados.equals("") || dados.equals("\n")) {
+					System.out.println("Base de dados vazia");
+				} else {
+					this.recuperaLista(dados);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -33,9 +37,19 @@ public class ListaUsuario {
 			for(int i = 0; i < dados.length();i++) {
 				objetos = dados.split("\n");
 			}
-			for(String o : objetos) {
-				String[] objeto = o.split(";");
-				this.addUsuario(objeto[0], objeto[1], objeto[2]);
+				for(String o : objetos) {
+					String[] objeto = o.split(";");
+					this.addUsuario(objeto[0], objeto[1], objeto[2]);
+				}
+			
+		}
+		
+		// atualiza o arquivo
+		private void atualizaDados(Conector c, String dados) {
+			try {
+				c.escreveDados(c.getFile(), dados);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		
@@ -74,15 +88,18 @@ public class ListaUsuario {
 				
 				this.lista.add(u);
 			}
+			this.atualizaDados(this.c, this.toString());
 		}
 		
 		// exclui usuario
 		public void excluiUsuario (String login) {
-			for (Usuario u : this.lista) {
-				if(u.getLogin().equals(login)) {
-					this.lista.remove(u);
-				}
-			}
+			if (this.buscaUsuario(login) != null) {
+				Usuario u = this.buscaUsuario(login);
+				this.lista.remove(u);
+				this.atualizaDados(this.c, this.toString());
+			} else {
+				System.out.println("Login não existente");
+			}	
 		}
 		
 		// editar usuario
@@ -94,10 +111,21 @@ public class ListaUsuario {
 						u.setEmail(email);
 					}
 				}
+				this.atualizaDados(this.c, this.toString());
 			} else {
 				System.out.println("Login não existente");
 			}			
 		}
 		
-		
+		@Override
+		public String toString() {
+			String dados = "";
+			for(Usuario u : this.lista) {
+				dados += u.getLogin() + ";";
+				dados += u.getEmail() + ";";
+				dados += u.getNome() + ";";
+				dados += "\n";
+			}
+			return dados;
+		}
 }
