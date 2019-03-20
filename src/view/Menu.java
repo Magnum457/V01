@@ -13,11 +13,11 @@ public class Menu {
 		out.println("Selecione uma opção");
 		String opcao = "";
 		while(!opcao.equals("q")) {
-			out.println("1 - Adicionar um usuario\n");
-			out.println("2 - Alterar um usuario\n");
-			out.println("3 - Excluir um usuario\n");
-			out.println("4 - Listar os usuarios\n");
-			out.println("q - Sair\n");
+			out.println("1 - Adicionar um usuario");
+			out.println("2 - Alterar um usuario");
+			out.println("3 - Excluir um usuario");
+			out.println("4 - Listar os usuarios");
+			out.println("q - Sair");
 			opcao = in.next();
 			switch(opcao) {
 				case "1":
@@ -30,7 +30,7 @@ public class Menu {
 					this.excluirUsuario(out, in, li);
 					break;
 				case "4":
-					this.listaUsuario(out, li);
+					this.listaUsuario(out, in, li);
 					break;
 				case "q":
 					out.println("Volte sempre :-D");
@@ -60,7 +60,7 @@ public class Menu {
 		out.println("Usuario inserido com sucesso");
 		
 		out.println("Aperte qualquer tecla para voltar ao menu principal");
-		in.next();
+		in.nextLine();
 	}
 	
 	public void alterarUsuario(PrintStream out, Scanner in, ListaUsuario li) {
@@ -85,7 +85,7 @@ public class Menu {
 			}
 		}
 		out.println("Aperte qualquer tecla para voltar ao menu principal");
-		in.next();
+		in.nextLine();
 	}
 	
 	public void excluirUsuario(PrintStream out, Scanner in, ListaUsuario li) {
@@ -106,12 +106,14 @@ public class Menu {
 			}
 		}
 		out.println("Aperte qualquer tecla para voltar ao menu principal");
-		in.next();
+		in.nextLine();
 	}
 	
-	public void listaUsuario(PrintStream out, ListaUsuario li) {
+	public void listaUsuario(PrintStream out, Scanner in, ListaUsuario li) {
 		String dados = li.listaUsuarios();
 		out.print(dados);
+		out.println();
+		in.nextLine();
 	}
 	
 }
