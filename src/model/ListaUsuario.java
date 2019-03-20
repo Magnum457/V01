@@ -67,9 +67,9 @@ public class ListaUsuario {
 		public String listaUsuarios () {
 			String listaUsuarios = "";
 			for (Usuario u : this.lista) {
-				listaUsuarios += "login: " + u.getLogin() + ";";
-				listaUsuarios += "nome: " + u.getNome() + ";";
-				listaUsuarios += "email: " + u.getEmail() + ";";
+				listaUsuarios += "login do usuario: " + u.getLogin() + ";  ";
+				listaUsuarios += "nome do usuario: " + u.getNome() + ";  ";
+				listaUsuarios += "email do usuario: " + u.getEmail() + ";  ";
 				listaUsuarios += "\n";
 			}
 				return listaUsuarios;
